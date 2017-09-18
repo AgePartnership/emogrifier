@@ -541,136 +541,136 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
         $styleRule = 'color: red;';
         $styleAttribute = 'style="' . $styleRule . '"';
 
-        return [
+        return array(
             'universal selector HTML'
-                => ['* {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'],
+                => array('* {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'),
             'universal selector BODY'
-                => ['* {' . $styleRule . '} ', '#<body ' . $styleAttribute . '>#'],
+                => array('* {' . $styleRule . '} ', '#<body ' . $styleAttribute . '>#'),
             'universal selector P'
-                => ['* {' . $styleRule . '} ', '#<p[^>]*' . $styleAttribute . '>#'],
+                => array('* {' . $styleRule . '} ', '#<p[^>]*' . $styleAttribute . '>#'),
             'type selector matches first P'
-                => ['p {' . $styleRule . '} ', '#<p class="p-1" ' . $styleAttribute . '>#'],
+                => array('p {' . $styleRule . '} ', '#<p class="p-1" ' . $styleAttribute . '>#'),
             'type selector matches second P'
-                => ['p {' . $styleRule . '} ', '#<p class="p-2" ' . $styleAttribute . '>#'],
+                => array('p {' . $styleRule . '} ', '#<p class="p-2" ' . $styleAttribute . '>#'),
             'descendant selector P SPAN'
-                => ['p span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'],
+                => array('p span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'),
             'descendant selector BODY SPAN'
-                => ['body span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'],
+                => array('body span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'),
             'child selector P > SPAN matches direct child'
-                => ['p > span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'],
+                => array('p > span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'),
             'child selector P > SPAN matches direct child without space after >'
-                => ['p >span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'],
+                => array('p >span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'),
             'child selector P > SPAN matches direct child without space before >'
-                => ['p> span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'],
+                => array('p> span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'),
             'child selector P > SPAN matches direct child without space before or after >'
-                => ['p>span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'],
+                => array('p>span {' . $styleRule . '} ', '#<span ' . $styleAttribute . '>#'),
             'child selector BODY > SPAN does not match grandchild'
-                => ['body > span {' . $styleRule . '} ', '#<span>#'],
-            'adjacent selector P + P does not match first P' => ['p + p {' . $styleRule . '} ', '#<p class="p-1">#'],
+                => array('body > span {' . $styleRule . '} ', '#<span>#'),
+            'adjacent selector P + P does not match first P' => array('p + p {' . $styleRule . '} ', '#<p class="p-1">#'),
             'adjacent selector P + P matches second P'
-                => ['p + p {' . $styleRule . '} ', '#<p class="p-2" style="' . $styleRule . '">#'],
+                => array('p + p {' . $styleRule . '} ', '#<p class="p-2" style="' . $styleRule . '">#'),
             'adjacent selector P + P matches third P'
-                => ['p + p {' . $styleRule . '} ', '#<p class="p-3" style="' . $styleRule . '">#'],
-            'ID selector #HTML' => ['#html {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'],
+                => array('p + p {' . $styleRule . '} ', '#<p class="p-3" style="' . $styleRule . '">#'),
+            'ID selector #HTML' => array('#html {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'),
             'type and ID selector HTML#HTML'
-                => ['html#html {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'],
-            'class selector .P-1' => ['.p-1 {' . $styleRule . '} ', '#<p class="p-1" ' . $styleAttribute . '>#'],
+                => array('html#html {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'),
+            'class selector .P-1' => array('.p-1 {' . $styleRule . '} ', '#<p class="p-1" ' . $styleAttribute . '>#'),
             'type and class selector P.P-1'
-                => ['p.p-1 {' . $styleRule . '} ', '#<p class="p-1" ' . $styleAttribute . '>#'],
+                => array('p.p-1 {' . $styleRule . '} ', '#<p class="p-1" ' . $styleAttribute . '>#'),
             'attribute presence selector SPAN[title] matches element with matching attribute'
-                => ['span[title] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'],
+                => array('span[title] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'),
             'attribute presence selector SPAN[title] does not match element without any attributes'
-                => ['span[title] {' . $styleRule . '} ', '#<span>#'],
-            'attribute value selector [id="html"] matches element with matching attribute value' => [
+                => array('span[title] {' . $styleRule . '} ', '#<span>#'),
+            'attribute value selector [id="html"] matches element with matching attribute value' => array(
                 '[id="html"] {' . $styleRule . '} ', '#<html id="html" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title] matches element with matching attribute value' => [
+            ),
+            'attribute value selector SPAN[title] matches element with matching attribute value' => array(
                 'span[title="bonjour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title] matches element with matching attribute value two words' => [
+            ),
+            'attribute value selector SPAN[title] matches element with matching attribute value two words' => array(
                 'span[title="buenas dias"] {' . $styleRule . '} ', '#<span title="buenas dias" '
                     . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title] matches element with matching attribute value four words' => [
+            ),
+            'attribute value selector SPAN[title] matches element with matching attribute value four words' => array(
                 'span[title="buenas dias bom dia"] {' . $styleRule . '} ', '#<span title="buenas dias bom dia" '
                     . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title~] matches element with an attribute value with just that word' => [
+            ),
+            'attribute value selector SPAN[title~] matches element with an attribute value with just that word' => array(
                 'span[title~="bonjour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title~] matches element with attribute value with that word as 2nd of 2' => [
+            ),
+            'attribute value selector SPAN[title~] matches element with attribute value with that word as 2nd of 2' => array(
                 'span[title~="dias"] {' . $styleRule . '} ', '#<span title="buenas dias" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title~] matches element with attribute value with that word as 1st of 2' => [
+            ),
+            'attribute value selector SPAN[title~] matches element with attribute value with that word as 1st of 2' => array(
                 'span[title~="buenas"] {' . $styleRule . '} ', '#<span title="buenas dias" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title*] matches element with an attribute value with just that word' => [
+            ),
+            'attribute value selector SPAN[title*] matches element with an attribute value with just that word' => array(
                 'span[title*="bonjour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title*] matches element with attribute value with that word as 2nd of 2' => [
+            ),
+            'attribute value selector SPAN[title*] matches element with attribute value with that word as 2nd of 2' => array(
                 'span[title*="dias"] {' . $styleRule . '} ', '#<span title="buenas dias" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title*] matches element with an attribute value with parts two words' => [
+            ),
+            'attribute value selector SPAN[title*] matches element with an attribute value with parts two words' => array(
                 'span[title*="enas di"] {' . $styleRule . '} ', '#<span title="buenas dias" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title*] matches element with an attribute value with odd characters' => [
+            ),
+            'attribute value selector SPAN[title*] matches element with an attribute value with odd characters' => array(
                 'span[title*=": subtitle; author"] {' . $styleRule . '} ', '#<span title="title: subtitle; author" '
                     . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title^] matches element with attribute value that is exactly that word' => [
+            ),
+            'attribute value selector SPAN[title^] matches element with attribute value that is exactly that word' => array(
                 'span[title^="bonjour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title^] matches element with an attribute value that begins that word' => [
+            ),
+            'attribute value selector SPAN[title^] matches element with an attribute value that begins that word' => array(
                 'span[title^="bonj"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
+            ),
             'attribute value selector SPAN[title^] matches element with an attribute value that begins that word '
-            . 'and contains other words' => [
+            . 'and contains other words' => array(
                 'span[title^="buenas"] {' . $styleRule . '} ', '#<span title="buenas dias" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title$] matches element with attribute value that is exactly that word' => [
+            ),
+            'attribute value selector SPAN[title$] matches element with attribute value that is exactly that word' => array(
                 'span[title$="bonjour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title$] matches element with an attribute value with two words' => [
+            ),
+            'attribute value selector SPAN[title$] matches element with an attribute value with two words' => array(
                 'span[title$="buenas dias"] {' . $styleRule . '} ', '#<span title="buenas dias" '
                     . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title$] matches element with an attribute value that end that word' => [
+            ),
+            'attribute value selector SPAN[title$] matches element with an attribute value that end that word' => array(
                 'span[title$="jour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
+            ),
             'attribute value selector SPAN[title$] matches element with an attribute value that end that word '
-            . 'and contains other words' => [
+            . 'and contains other words' => array(
                 'span[title$="dias"] {' . $styleRule . '} ', '#<span title="buenas dias" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title|] matches element with attribute value that is exactly that word' => [
+            ),
+            'attribute value selector SPAN[title|] matches element with attribute value that is exactly that word' => array(
                 'span[title|="bonjour"] {' . $styleRule . '} ', '#<span title="bonjour" ' . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title|] matches element with an attribute value with two words' => [
+            ),
+            'attribute value selector SPAN[title|] matches element with an attribute value with two words' => array(
                 'span[title|="buenas dias"] {' . $styleRule . '} ', '#<span title="buenas dias" '
                     . $styleAttribute . '>#'
-            ],
-            'attribute value selector SPAN[title|] matches element with an attribute value with 2 words with hypen' => [
+            ),
+            'attribute value selector SPAN[title|] matches element with an attribute value with 2 words with hypen' => array(
                 'span[title|="avez"] {' . $styleRule . '} ', '#<span title="avez-vous" ' . $styleAttribute . '>#'
-            ],
+            ),
             'attribute value selector SPAN[title] does not match element with other attribute value'
-                => ['span[title="bonjour"] {' . $styleRule . '} ', '#<span title="buenas dias">#'],
+                => array('span[title="bonjour"] {' . $styleRule . '} ', '#<span title="buenas dias">#'),
             'attribute value selector SPAN[title] does not match element without any attributes'
-                => ['span[title="bonjour"] {' . $styleRule . '} ', '#<span>#'],
+                => array('span[title="bonjour"] {' . $styleRule . '} ', '#<span>#'),
             'P:first-child matches first child with matching tag'
-                => ['p:first-child {' . $styleRule . '} ', '#<p class="p-1" style="' . $styleRule . '">#'],
+                => array('p:first-child {' . $styleRule . '} ', '#<p class="p-1" style="' . $styleRule . '">#'),
             'DIV:first-child does not match first child with mismatching tag'
-                => ['div:first-child {' . $styleRule . '} ', '#<p class="p-1">#'],
+                => array('div:first-child {' . $styleRule . '} ', '#<p class="p-1">#'),
             'P:first-child does not match middle child'
-                => ['p:first-child {' . $styleRule . '} ', '#<p class="p-2">#'],
+                => array('p:first-child {' . $styleRule . '} ', '#<p class="p-2">#'),
             'P:first-child does not match last child'
-                => ['p:first-child {' . $styleRule . '} ', '#<p class="p-6">#'],
-            'P:last-child does not match first child' => ['p:last-child {' . $styleRule . '} ', '#<p class="p-1">#'],
+                => array('p:first-child {' . $styleRule . '} ', '#<p class="p-6">#'),
+            'P:last-child does not match first child' => array('p:last-child {' . $styleRule . '} ', '#<p class="p-1">#'),
             'P:last-child does not match middle child'
-                => ['p:last-child {' . $styleRule . '} ', '#<p class="p-3">#'],
+                => array('p:last-child {' . $styleRule . '} ', '#<p class="p-3">#'),
             'P:last-child matches last child'
-                => ['p:last-child {' . $styleRule . '} ', '#<p class="p-6" style="' . $styleRule . '">#'],
+                => array('p:last-child {' . $styleRule . '} ', '#<p class="p-6" style="' . $styleRule . '">#'),
             'DIV:last-child does not match last child with mismatching tag'
-                => ['div:last-child {' . $styleRule . '} ', '#<p class="p-6">#'],
-        ];
+                => array('div:last-child {' . $styleRule . '} ', '#<p class="p-6">#'),
+        );
     }
 
     /**
@@ -708,22 +708,22 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function cssDeclarationWhitespaceDroppingDataProvider()
     {
-        return [
-            'no whitespace, trailing semicolon' => ['color:#000;', 'color: #000;'],
-            'no whitespace, no trailing semicolon' => ['color:#000', 'color: #000;'],
-            'space after colon, no trailing semicolon' => ['color: #000', 'color: #000;'],
-            'space before colon, no trailing semicolon' => ['color :#000', 'color: #000;'],
-            'space before property name, no trailing semicolon' => [' color:#000', 'color: #000;'],
-            'space before trailing semicolon' => [' color:#000 ;', 'color: #000;'],
-            'space after trailing semicolon' => [' color:#000; ', 'color: #000;'],
-            'space after property value, no trailing semicolon' => [' color:#000 ', 'color: #000;'],
-            'space after property value, trailing semicolon' => [' color:#000; ', 'color: #000;'],
-            'newline before property name, trailing semicolon' => ["\ncolor:#222;", 'color: #222;'],
-            'newline after property semicolon' => ["color:#222;\n", 'color: #222;'],
-            'newline before colon, trailing semicolon' => ["color\n:#333;", 'color: #333;'],
-            'newline after colon, trailing semicolon' => ["color:\n#333;", 'color: #333;'],
-            'newline after semicolon' => ["color:#333\n;", 'color: #333;'],
-        ];
+        return array(
+            'no whitespace, trailing semicolon' => array('color:#000;', 'color: #000;'),
+            'no whitespace, no trailing semicolon' => array('color:#000', 'color: #000;'),
+            'space after colon, no trailing semicolon' => array('color: #000', 'color: #000;'),
+            'space before colon, no trailing semicolon' => array('color :#000', 'color: #000;'),
+            'space before property name, no trailing semicolon' => array(' color:#000', 'color: #000;'),
+            'space before trailing semicolon' => array(' color:#000 ;', 'color: #000;'),
+            'space after trailing semicolon' => array(' color:#000; ', 'color: #000;'),
+            'space after property value, no trailing semicolon' => array(' color:#000 ', 'color: #000;'),
+            'space after property value, trailing semicolon' => array(' color:#000; ', 'color: #000;'),
+            'newline before property name, trailing semicolon' => array("\ncolor:#222;", 'color: #222;'),
+            'newline after property semicolon' => array("color:#222;\n", 'color: #222;'),
+            'newline before colon, trailing semicolon' => array("color\n:#333;", 'color: #333;'),
+            'newline after colon, trailing semicolon' => array("color:\n#333;", 'color: #333;'),
+            'newline after semicolon' => array("color:#333\n;", 'color: #333;'),
+        );
     }
 
     /**
@@ -756,23 +756,23 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function formattedCssDeclarationDataProvider()
     {
-        return [
-            'one declaration' => ['color: #000;', 'color: #000;'],
-            'one declaration with dash in property name' => ['font-weight: bold;', 'font-weight: bold;'],
-            'one declaration with space in property value' => ['margin: 0 4px;', 'margin: 0 4px;'],
-            'two declarations separated by semicolon' => ['color: #000;width: 3px;', 'color: #000; width: 3px;'],
+        return array(
+            'one declaration' => array('color: #000;', 'color: #000;'),
+            'one declaration with dash in property name' => array('font-weight: bold;', 'font-weight: bold;'),
+            'one declaration with space in property value' => array('margin: 0 4px;', 'margin: 0 4px;'),
+            'two declarations separated by semicolon' => array('color: #000;width: 3px;', 'color: #000; width: 3px;'),
             'two declarations separated by semicolon and space'
-                => ['color: #000; width: 3px;', 'color: #000; width: 3px;'],
-            'two declarations separated by semicolon and linefeed' => [
+                => array('color: #000; width: 3px;', 'color: #000; width: 3px;'),
+            'two declarations separated by semicolon and linefeed' => array(
                 'color: #000;' . self::LF . 'width: 3px;', 'color: #000; width: 3px;'
-            ],
-            'two declarations separated by semicolon and Windows line ending' => [
+            ),
+            'two declarations separated by semicolon and Windows line ending' => array(
                 "color: #000;\r\nwidth: 3px;", 'color: #000; width: 3px;'
-            ],
-            'one declaration with leading dash in property name' => [
+            ),
+            'one declaration with leading dash in property name' => array(
                 '-webkit-text-size-adjust:none;', '-webkit-text-size-adjust: none;'
-            ],
-        ];
+            ),
+        );
     }
 
     /**
@@ -803,12 +803,12 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function invalidDeclarationDataProvider()
     {
-        return [
-            'missing dash in property name' => ['font weight: bold;'],
-            'invalid character in property name' => ['-9webkit-text-size-adjust:none;'],
-            'missing :' => ['-webkit-text-size-adjust none'],
-            'missing value' => ['-webkit-text-size-adjust :'],
-        ];
+        return array(
+            'missing dash in property name' => array('font weight: bold;'),
+            'invalid character in property name' => array('-9webkit-text-size-adjust:none;'),
+            'missing :' => array('-webkit-text-size-adjust none'),
+            'missing value' => array('-webkit-text-size-adjust :'),
+        );
     }
 
     /**
@@ -983,19 +983,19 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function unneededCssThingsDataProvider()
     {
-        return [
-            'CSS comments with one asterisk' => ['p {color: #000;/* black */}', 'black'],
-            'CSS comments with two asterisks' => ['p {color: #000;/** black */}', 'black'],
-            '@import directive' => ['@import "foo.css";', '@import'],
-            'style in "aural" media type rule' => ['@media aural {p {color: #000;}}', '#000'],
-            'style in "braille" media type rule' => ['@media braille {p {color: #000;}}', '#000'],
-            'style in "embossed" media type rule' => ['@media embossed {p {color: #000;}}', '#000'],
-            'style in "handheld" media type rule' => ['@media handheld {p {color: #000;}}', '#000'],
-            'style in "projection" media type rule' => ['@media projection {p {color: #000;}}', '#000'],
-            'style in "speech" media type rule' => ['@media speech {p {color: #000;}}', '#000'],
-            'style in "tty" media type rule' => ['@media tty {p {color: #000;}}', '#000'],
-            'style in "tv" media type rule' => ['@media tv {p {color: #000;}}', '#000'],
-        ];
+        return array(
+            'CSS comments with one asterisk' => array('p {color: #000;/* black */}', 'black'),
+            'CSS comments with two asterisks' => array('p {color: #000;/** black */}', 'black'),
+            '@import directive' => array('@import "foo.css";', '@import'),
+            'style in "aural" media type rule' => array('@media aural {p {color: #000;}}', '#000'),
+            'style in "braille" media type rule' => array('@media braille {p {color: #000;}}', '#000'),
+            'style in "embossed" media type rule' => array('@media embossed {p {color: #000;}}', '#000'),
+            'style in "handheld" media type rule' => array('@media handheld {p {color: #000;}}', '#000'),
+            'style in "projection" media type rule' => array('@media projection {p {color: #000;}}', '#000'),
+            'style in "speech" media type rule' => array('@media speech {p {color: #000;}}', '#000'),
+            'style in "tty" media type rule' => array('@media tty {p {color: #000;}}', '#000'),
+            'style in "tv" media type rule' => array('@media tv {p {color: #000;}}', '#000'),
+        );
     }
 
     /**
@@ -1023,14 +1023,14 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function mediaRulesDataProvider()
     {
-        return [
-            'style in "only all" media type rule' => ['@media only all {p {color: #000;}}'],
-            'style in "only screen" media type rule' => ['@media only screen {p {color: #000;}}'],
-            'style in media type rule' => ['@media {p {color: #000;}}'],
-            'style in "screen" media type rule' => ['@media screen {p {color: #000;}}'],
-            'style in "print" media type rule' => ['@media print {p {color: #000;}}'],
-            'style in "all" media type rule' => ['@media all {p {color: #000;}}'],
-        ];
+        return array(
+            'style in "only all" media type rule' => array('@media only all {p {color: #000;}}'),
+            'style in "only screen" media type rule' => array('@media only screen {p {color: #000;}}'),
+            'style in media type rule' => array('@media {p {color: #000;}}'),
+            'style in "screen" media type rule' => array('@media screen {p {color: #000;}}'),
+            'style in "print" media type rule' => array('@media print {p {color: #000;}}'),
+            'style in "all" media type rule' => array('@media all {p {color: #000;}}'),
+        );
     }
 
     /**
@@ -1127,28 +1127,28 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function validMediaPreserveDataProvider()
     {
-        return [
-            'style in "only screen and size" media type rule' => [
+        return array(
+            'style in "only screen and size" media type rule' => array(
                 '@media only screen and (min-device-width: 320px) and (max-device-width: 480px) { h1 { color:red; } }',
-            ],
-            'style in "screen size" media type rule' => [
+            ),
+            'style in "screen size" media type rule' => array(
                 '@media screen and (min-device-width: 320px) and (max-device-width: 480px) { h1 { color:red; } }',
-            ],
-            'style in "only screen and screen size" media type rule' => [
+            ),
+            'style in "only screen and screen size" media type rule' => array(
                 '@media only screen and (min-device-width: 320px) and (max-device-width: 480px) { h1 { color:red; } }',
-            ],
-            'style in "all and screen size" media type rule' => [
+            ),
+            'style in "all and screen size" media type rule' => array(
                 '@media all and (min-device-width: 320px) and (max-device-width: 480px) { h1 { color:red; } }',
-            ],
-            'style in "only all and" media type rule' => [
+            ),
+            'style in "only all and" media type rule' => array(
                 '@media only all and (min-device-width: 320px) and (max-device-width: 480px) { h1 { color:red; } }',
-            ],
-            'style in "all" media type rule' => ['@media all {p {color: #000;}}'],
-            'style in "only screen" media type rule' => ['@media only screen { h1 { color:red; } }'],
-            'style in "only all" media type rule' => ['@media only all { h1 { color:red; } }'],
-            'style in "screen" media type rule' => ['@media screen { h1 { color:red; } }'],
-            'style in media type rule without specification' => ['@media { h1 { color:red; } }'],
-        ];
+            ),
+            'style in "all" media type rule' => array('@media all {p {color: #000;}}'),
+            'style in "only screen" media type rule' => array('@media only screen { h1 { color:red; } }'),
+            'style in "only all" media type rule' => array('@media only all { h1 { color:red; } }'),
+            'style in "screen" media type rule' => array('@media screen { h1 { color:red; } }'),
+            'style in media type rule without specification' => array('@media { h1 { color:red; } }'),
+        );
     }
 
     /**
@@ -1208,15 +1208,15 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function invalidMediaPreserveDataProvider()
     {
-        return [
-            'style in "braille" type rule' => ['@media braille { h1 { color:red; } }'],
-            'style in "embossed" type rule' => ['@media embossed { h1 { color:red; } }'],
-            'style in "handheld" type rule' => ['@media handheld { h1 { color:red; } }'],
-            'style in "projection" type rule' => ['@media projection { h1 { color:red; } }'],
-            'style in "speech" type rule' => ['@media speech { h1 { color:red; } }'],
-            'style in "tty" type rule' => ['@media tty { h1 { color:red; } }'],
-            'style in "tv" type rule' => ['@media tv { h1 { color:red; } }'],
-        ];
+        return array(
+            'style in "braille" type rule' => array('@media braille { h1 { color:red; } }'),
+            'style in "embossed" type rule' => array('@media embossed { h1 { color:red; } }'),
+            'style in "handheld" type rule' => array('@media handheld { h1 { color:red; } }'),
+            'style in "projection" type rule' => array('@media projection { h1 { color:red; } }'),
+            'style in "speech" type rule' => array('@media speech { h1 { color:red; } }'),
+            'style in "tty" type rule' => array('@media tty { h1 { color:red; } }'),
+            'style in "tv" type rule' => array('@media tv { h1 { color:red; } }'),
+        );
     }
 
     /**
@@ -1922,12 +1922,12 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function dataUriMediaTypeDataProvider()
     {
-        return [
-            'nothing' => [''],
-            ';charset=utf-8' => [';charset=utf-8'],
-            ';base64' => [';base64'],
-            ';charset=utf-8;base64' => [';charset=utf-8;base64'],
-        ];
+        return array(
+            'nothing' => array(''),
+            ';charset=utf-8' => array(';charset=utf-8'),
+            ';base64' => array(';base64'),
+            ';charset=utf-8;base64' => array(';charset=utf-8;base64'),
+        );
     }
 
     /**
@@ -1962,66 +1962,66 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function matchingCssToHtmlMappingDataProvider()
     {
-        return [
+        return array(
             'background-color => bgcolor'
-                => ['<p>hi</p>', 'p {background-color: red;}', 'p', 'bgcolor="red"'],
+                => array('<p>hi</p>', 'p {background-color: red;}', 'p', 'bgcolor="red"'),
             'background-color (with !important) => bgcolor'
-                => ['<p>hi</p>', 'p {background-color: red !important;}', 'p', 'bgcolor="red"'],
+                => array('<p>hi</p>', 'p {background-color: red !important;}', 'p', 'bgcolor="red"'),
             'p.text-align => align'
-                => ['<p>hi</p>', 'p {text-align: justify;}', 'p', 'align="'],
+                => array('<p>hi</p>', 'p {text-align: justify;}', 'p', 'align="'),
             'div.text-align => align'
-                => ['<div>hi</div>', 'div {text-align: justify;}', 'div', 'align="'],
+                => array('<div>hi</div>', 'div {text-align: justify;}', 'div', 'align="'),
             'td.text-align => align'
-                => ['<table><tr><td>hi</td></tr></table>', 'td {text-align: justify;}', 'td', 'align="'],
+                => array('<table><tr><td>hi</td></tr></table>', 'td {text-align: justify;}', 'td', 'align="'),
             'text-align: left => align=left'
-                => ['<p>hi</p>', 'p {text-align: left;}', 'p', 'align="left"'],
+                => array('<p>hi</p>', 'p {text-align: left;}', 'p', 'align="left"'),
             'text-align: right => align=right'
-                => ['<p>hi</p>', 'p {text-align: right;}', 'p', 'align="right"'],
+                => array('<p>hi</p>', 'p {text-align: right;}', 'p', 'align="right"'),
             'text-align: center => align=center'
-                => ['<p>hi</p>', 'p {text-align: center;}', 'p', 'align="center"'],
+                => array('<p>hi</p>', 'p {text-align: center;}', 'p', 'align="center"'),
             'text-align: justify => align:justify'
-                => ['<p>hi</p>', 'p {text-align: justify;}', 'p', 'align="justify"'],
+                => array('<p>hi</p>', 'p {text-align: justify;}', 'p', 'align="justify"'),
             'img.float: right => align=right'
-                => ['<img>', 'img {float: right;}', 'img', 'align="right"'],
+                => array('<img>', 'img {float: right;}', 'img', 'align="right"'),
             'img.float: left => align=left'
-                => ['<img>', 'img {float: left;}', 'img', 'align="left"'],
+                => array('<img>', 'img {float: left;}', 'img', 'align="left"'),
             'table.float: right => align=right'
-                => ['<table></table>', 'table {float: right;}', 'table', 'align="right"'],
+                => array('<table></table>', 'table {float: right;}', 'table', 'align="right"'),
             'table.float: left => align=left'
-                => ['<table></table>', 'table {float: left;}', 'table', 'align="left"'],
+                => array('<table></table>', 'table {float: left;}', 'table', 'align="left"'),
             'table.border-spacing: 0 => cellspacing=0'
-                => ['<table><tr><td></td></tr></table>', 'table {border-spacing: 0;}', 'table', 'cellspacing="0"'],
+                => array('<table><tr><td></td></tr></table>', 'table {border-spacing: 0;}', 'table', 'cellspacing="0"'),
             'background => bgcolor'
-                => ['<p>Bonjour</p>', 'p {background: red top;}', 'p', 'bgcolor="red"'],
+                => array('<p>Bonjour</p>', 'p {background: red top;}', 'p', 'bgcolor="red"'),
             'width with px'
-                => ['<p>Hello</p>', 'p {width: 100px;}', 'p', 'width="100"'],
+                => array('<p>Hello</p>', 'p {width: 100px;}', 'p', 'width="100"'),
             'width with %'
-                => ['<p>Hello</p>', 'p {width: 50%;}', 'p', 'width="50%"'],
+                => array('<p>Hello</p>', 'p {width: 50%;}', 'p', 'width="50%"'),
             'height with px'
-                => ['<p>Hello</p>', 'p {height: 100px;}', 'p', 'height="100"'],
+                => array('<p>Hello</p>', 'p {height: 100px;}', 'p', 'height="100"'),
             'height with %'
-                => ['<p>Hello</p>', 'p {height: 50%;}', 'p', 'height="50%"'],
+                => array('<p>Hello</p>', 'p {height: 50%;}', 'p', 'height="50%"'),
             'img.margin: 0 auto (= horizontal centering) => align=center'
-                => ['<img>', 'img {margin: 0 auto;}', 'img', 'align="center"'],
+                => array('<img>', 'img {margin: 0 auto;}', 'img', 'align="center"'),
             'img.margin: auto (= horizontal centering) => align=center'
-                => ['<img>', 'img {margin: auto;}', 'img', 'align="center"'],
+                => array('<img>', 'img {margin: auto;}', 'img', 'align="center"'),
             'img.margin: 10 auto 30 auto (= horizontal centering) => align=center'
-                => ['<img>', 'img {margin: 10 auto 30 auto;}', 'img', 'align="center"'],
+                => array('<img>', 'img {margin: 10 auto 30 auto;}', 'img', 'align="center"'),
             'table.margin: 0 auto (= horizontal centering) => align=center'
-                => ['<table></table>', 'table {margin: 0 auto;}', 'table', 'align="center"'],
+                => array('<table></table>', 'table {margin: 0 auto;}', 'table', 'align="center"'),
             'table.margin: auto (= horizontal centering) => align=center'
-                => ['<table></table>', 'table {margin: auto;}', 'table', 'align="center"'],
+                => array('<table></table>', 'table {margin: auto;}', 'table', 'align="center"'),
             'table.margin: 10 auto 30 auto (= horizontal centering) => align=center'
-                => ['<table></table>', 'table {margin: 10 auto 30 auto;}', 'table', 'align="center"'],
+                => array('<table></table>', 'table {margin: 10 auto 30 auto;}', 'table', 'align="center"'),
             'img.border: none => border=0'
-                => ['<img>', 'img {border: none;}', 'img', 'border="0"'],
+                => array('<img>', 'img {border: none;}', 'img', 'border="0"'),
             'img.border: 0 => border=0'
-                => ['<img>', 'img {border: none;}', 'img', 'border="0"'],
+                => array('<img>', 'img {border: none;}', 'img', 'border="0"'),
             'table.border: none => border=0'
-                => ['<table></table>', 'table {border: none;}', 'table', 'border="0"'],
+                => array('<table></table>', 'table {border: none;}', 'table', 'border="0"'),
             'table.border: 0 => border=0'
-                => ['<table></table>', 'table {border: none;}', 'table', 'border="0"'],
-        ];
+                => array('<table></table>', 'table {border: none;}', 'table', 'border="0"'),
+        );
     }
 
     /**
@@ -2054,34 +2054,34 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function notMatchingCssToHtmlMappingDataProvider()
     {
-        return [
+        return array(
             'background URL'
-                => ['<p>Hello</p>', 'p {background: url(bg.png);}', 'bgcolor'],
+                => array('<p>Hello</p>', 'p {background: url(bg.png);}', 'bgcolor'),
             'background URL with position'
-                => ['<p>Hello</p>', 'p {background: url(bg.png) top;}', 'bgcolor'],
+                => array('<p>Hello</p>', 'p {background: url(bg.png) top;}', 'bgcolor'),
             'img.margin: 10 5 30 auto (= no horizontal centering)'
-                => ['<img>', 'img {margin: 10 5 30 auto;}', 'align'],
+                => array('<img>', 'img {margin: 10 5 30 auto;}', 'align'),
             'p.margin: auto'
-                => ['<p>Bonjour</p>', 'p {margin: auto;}', 'align'],
+                => array('<p>Bonjour</p>', 'p {margin: auto;}', 'align'),
             'p.border: none'
-                => ['<p>Bonjour</p>', 'p {border: none;}', 'border'],
+                => array('<p>Bonjour</p>', 'p {border: none;}', 'border'),
             'img.border: 1px solid black'
-                => ['<p>Bonjour</p>', 'p {border: 1px solid black;}', 'border'],
+                => array('<p>Bonjour</p>', 'p {border: 1px solid black;}', 'border'),
             'span.text-align'
-                => ['<span>hi</span>', 'span {text-align: justify;}', 'align'],
+                => array('<span>hi</span>', 'span {text-align: justify;}', 'align'),
             'text-align: inherit'
-                => ['<p>hi</p>', 'p {text-align: inherit;}', 'align'],
+                => array('<p>hi</p>', 'p {text-align: inherit;}', 'align'),
             'span.float'
-                => ['<span>hi</span>', 'span {float: right;}', 'align'],
+                => array('<span>hi</span>', 'span {float: right;}', 'align'),
             'float: none'
-                => ['<table></table>', 'table {float: none;}', 'align'],
+                => array('<table></table>', 'table {float: none;}', 'align'),
             'p.border-spacing'
-                => ['<p>Hello</p>', 'p {border-spacing: 5px;}', 'cellspacing'],
+                => array('<p>Hello</p>', 'p {border-spacing: 5px;}', 'cellspacing'),
             'height: auto'
-                => ['<img src="logo.png" alt="">', 'img {width: 110px; height: auto;}', 'height'],
+                => array('<img src="logo.png" alt="">', 'img {width: 110px; height: auto;}', 'height'),
             'width: auto'
-                => ['<img src="logo.png" alt="">', 'img {width: auto; height: 110px;}', 'width'],
-        ];
+                => array('<img src="logo.png" alt="">', 'img {width: auto; height: 110px;}', 'width'),
+        );
     }
 
     /**
